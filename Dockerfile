@@ -5,7 +5,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
   nginx supervisor php7.2-cli php7.2-curl php7.2-mbstring php7.2-mysql php7.2-fpm \
   php7.2-json php7.2-intl php7.2-gd php7.2-pgsql php7.2-xml php7.2-opcache && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
-RUN mkdir /run/php && chown www-data:www-data -R /run/php
+RUN mkdir /run/php
 
 # add ttrss as the only nginx site
 ADD ttrss.nginx.conf /etc/nginx/sites-available/ttrss
@@ -34,5 +34,4 @@ ENV DB_PASS ttrss
 # always re-configure database with current ENV when RUNning container, then monitor all services
 ADD configure-db.php /configure-db.php
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-USER www-data
 CMD php /configure-db.php && supervisord -c /etc/supervisor/conf.d/supervisord.conf
