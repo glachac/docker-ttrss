@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 MAINTAINER Rob Connolly <rob@webworxshop.com>
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
-  nginx supervisor php7.2-cli php7.2-curl php7.2-mbstring php7.2-mysql \
+  nginx supervisor php7.2-cli php7.2-curl php7.2-mbstring php7.2-mysql php7.2-fpm \
   php7.2-json php7.2-intl php7.2-gd php7.2-pgsql php7.2-xml php7.2-opcache && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
