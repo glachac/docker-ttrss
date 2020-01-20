@@ -29,7 +29,7 @@ hadolint:
   <<: *preflight
   image: hadolint/hadolint
   before_script:
-    - hadolint -- version
+    - hadolint --version
   script:
     - hadolint Dockerfile
 
