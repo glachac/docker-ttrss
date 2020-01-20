@@ -1,5 +1,7 @@
 ---
-image: docker:latest
+stages:
+  - preflight
+  - build
 
 variables:
   DOCKER_DRIVER: overlay
@@ -8,11 +10,26 @@ variables:
 services:
   - docker:dind
 
-before_script:
-  - docker info
+# Generic preflight template
+.preflight: &preflight
+  stage: preflight
+  tags:
+    - hass
+
+# Preflight jobs
+yamllint:
+  <<: *preflight
+  image: sdesbure/yamllint
+  before_script:
+    - yamllint --version
+  script:
+    - yamllint .
 
 build:
   stage: build
+  image: docker:latest
+  before_script:
+    - docker info
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
     - docker build -t $IMAGE_TAG .
