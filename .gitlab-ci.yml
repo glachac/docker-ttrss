@@ -25,6 +25,14 @@ yamllint:
   script:
     - yamllint .
 
+hadolint:
+  <<: *preflight
+  image: hadolint/hadolint
+  before_script:
+    - hadolint -- version
+  script:
+    - hadolint Dockerfile
+
 build:
   stage: build
   image: docker:latest
