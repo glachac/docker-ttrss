@@ -5,6 +5,7 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay
+  DOCKER_HOST: tcp://docker:2375/
   IMAGE_TAG: registry.gitlab.com/robconnolly/docker-ttrss:latest
 
 # Generic preflight template
