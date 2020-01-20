@@ -7,9 +7,6 @@ variables:
   DOCKER_DRIVER: overlay
   IMAGE_TAG: registry.gitlab.com/robconnolly/docker-ttrss:latest
 
-services:
-  - docker:dind
-
 # Generic preflight template
 .preflight: &preflight
   stage: preflight
@@ -36,6 +33,8 @@ hadolint:
 build:
   stage: build
   image: docker:latest
+  services:
+    - docker:dind
   before_script:
     - docker info
   script:
