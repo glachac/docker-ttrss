@@ -34,4 +34,4 @@ ENV DB_PASS ttrss
 # always re-configure database with current ENV when RUNning container, then monitor all services
 COPY configure-db.php /configure-db.php
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-CMD ["php", "/configure-db.php && supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD php /configure-db.php && supervisord -c /etc/supervisor/conf.d/supervisord.conf
